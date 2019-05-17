@@ -16,8 +16,9 @@ for bot in bot_dirs:
     bot_class = getattr(bot_mod, bot)
     bot_cls = getattr(bot_class, bot)
     my_bot = bot_cls()
-    bots.append(threading.Thread(target=my_bot.run))
+    # bots.append(threading.Thread(target=my_bot.run))
     # bots.append(my_bot)
+    my_bot.run()
 
-for bot in bots:
-    bot.start()
+# for bot in bots:
+    # bot.start()

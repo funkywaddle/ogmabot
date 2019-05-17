@@ -3,8 +3,7 @@ from discord.ext import commands
 import asyncio
 
 import logging
-from bot_discord import config
-from bot_discord import tokens
+from bot_discord import config, tokens
 
 class bot_discord(discord.Client):
 
