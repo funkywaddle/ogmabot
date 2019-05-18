@@ -2,6 +2,6 @@ from peewee import *
 
 db = SqliteDatabase('data/bot.db')
 
-class GKGModel(Model):
+class BaseModel(Model):
     class Meta:
         database = db
