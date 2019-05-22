@@ -61,5 +61,3 @@ class bot_discord(discord.Client):
 
         if message.content.startswith(config.PREFIX):
             pass
-
-
