@@ -20,9 +20,7 @@ class custom:
 
             if len(cmds) is 1:
                 msg = cmds[0].response
-
             else:
-                msg = f'@{ctx.author.name}, I do not know which command you are trying to run. Please check your spelling and try again'
                 msg = f'@{ctx.author.name}, I do not know which command you are trying to run. Please check your spelling and try again'
         finally:
             msg = variable_parser().run_parsers(msg, ctx)
