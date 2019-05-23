@@ -1,5 +1,6 @@
 from data.models.command import Command
 from twitchio.ext import commands
+from bot_twitch.libs.variable_parser import variable_parser
 import distance
 
 @commands.cog(name='custom')
@@ -24,4 +25,5 @@ class custom:
                 msg = f'@{ctx.author.name}, I do not know which command you are trying to run. Please check your spelling and try again'
                 msg = f'@{ctx.author.name}, I do not know which command you are trying to run. Please check your spelling and try again'
         finally:
+            msg = variable_parser().run_parsers(msg, ctx)
             await ctx.send(msg)

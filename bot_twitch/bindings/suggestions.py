@@ -26,6 +26,7 @@ class suggestions:
             times = 'time'
             if int(sug.upvote_count) > 1:
                 times += 's'
-            output.append(f'Suggestion: {sug.suggestion}\nID: {sug.id} | Voted {sug.upvote_count} {times}')
+            output.append(f'{sug.suggestion} | ID: {sug.id} | {sug.upvote_count} votes')
 
-        await ctx.send("\n-------------\n".join(output))
+        await ctx.send("""
+            """.join(output))
