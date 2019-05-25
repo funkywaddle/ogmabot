@@ -6,11 +6,13 @@ import distance
 @commands.cog(name='custom')
 class custom:
 
+    def __init__(self, bot):
+        print('Custom Command up and running')
+
     @commands.command(name='custom')
     async def binding(self, ctx):
         word_list = ctx.message.content.split()
         keyword = word_list[0][1:]
-        test = ctx.command
 
         try:
             msg = Command.get(Command.command == keyword).response

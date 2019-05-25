@@ -18,7 +18,7 @@ class bot_twitch(commands.Bot):
 
     async def event_ready(self):
         self.load_orders()
-        self.load_parsers()
+        # self.load_parsers()
         print('Ogma Bot initialized')
 
     async def event_usernotice_subscription(self, metadata):
@@ -52,9 +52,9 @@ class bot_twitch(commands.Bot):
         for cmd in commands:
             self.load_module(name=f'bot_twitch.bindings.{cmd}')
 
-    def load_parsers(self):
-        imported = __import__('bot_twitch.variable_parsers', globals(), locals(), ['*'], 0)
+    # def load_parsers(self):
+    #     imported = __import__('bot_twitch.variable_parsers', globals(), locals(), ['*'], 0)
 
-        for name, obj in inspect.getmembers(imported, inspect.ismodule):
-            for cname, cobj in inspect.getmembers(obj, inspect.isclass):
-                self.parsers.append(cobj())
+    #     for name, obj in inspect.getmembers(imported, inspect.ismodule):
+    #         for cname, cobj in inspect.getmembers(obj, inspect.isclass):
+    #             self.parsers.append(cobj())

@@ -1,8 +1,10 @@
 import inspect
+from bot_twitch.variable_parsers.parser import parser
 
 class variable_parser:
 
     def __init__(self):
+        print('variable_parser instantiated')
         self.parsers = []
         self.get_parsers()
 
@@ -23,4 +25,6 @@ class variable_parser:
 
         for name, obj in inspect.getmembers(imported, inspect.ismodule):
             for cname, cobj in inspect.getmembers(obj, inspect.isclass):
-                self.parsers.append(cobj())
+                psr = cobj()
+                if isinstance(psr, parser) and not cname == parser.__name__:
+                    self.parsers.append(psr)
