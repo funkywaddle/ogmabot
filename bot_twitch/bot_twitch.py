@@ -51,10 +51,3 @@ class bot_twitch(commands.Bot):
         commands = [ basename(f)[:-3] for f in modules if isfile(f) and not f.endswith('__init__.py') and not basename(f).startswith('_')]
         for cmd in commands:
             self.load_module(name=f'bot_twitch.bindings.{cmd}')
-
-    # def load_parsers(self):
-    #     imported = __import__('bot_twitch.variable_parsers', globals(), locals(), ['*'], 0)
-
-    #     for name, obj in inspect.getmembers(imported, inspect.ismodule):
-    #         for cname, cobj in inspect.getmembers(obj, inspect.isclass):
-    #             self.parsers.append(cobj())
