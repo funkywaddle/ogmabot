@@ -1,4 +1,5 @@
 from twitchio.ext import commands
+from twitchio.ext.commands.errors import CommandNotFound
 import inspect
 from bot_twitch import bindings
 from bot_twitch.config import tokens, config
@@ -24,25 +25,26 @@ class bot_twitch(commands.Bot):
     async def event_usernotice_subscription(self, metadata):
         print(metadata)
 
-    async def handle_commands(self, message, ctx=None):
+    async def event_command_error(self, ctx, error):
+        if isinstance(error,CommandNotFound):
+            await self.handle_custom_command(ctx.message, ctx)
+        else
+            super().event_command_error(ctx, error)
+
+    async def handle_custom_command(self, message, ctx=None):
         if not message.content.startswith(config.PREFIX):
             return
 
         command = message.content.split()[0][1:]
 
-        if command == 'poweroff':
-            pass
-        elif command in self.commands:
-            await super().handle_commands(message, ctx)
-        else:
-            cmd = self.commands['custom']
-            if ctx is None:
-                try:
-                    ctx = await self.get_context(message)
-                except Exception as e:
-                    return await self.event_error(e, message.raw_data)
+        cmd = self.commands['custom']
+        if ctx is None:
+            try:
+                ctx = await self.get_context(message)
+            except Exception as e:
+                return await self.event_error(e, message.raw_data)
 
-            await cmd._callback(self.modules[config.CATCH_ALL_COMMAND], ctx)
+        await cmd._callback(self.modules[config.CATCH_ALL_COMMAND], ctx)
 
     def load_orders(self):
         from os.path import dirname, basename, isfile
